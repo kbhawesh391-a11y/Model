@@ -47,3 +47,4 @@ if st.button("Predict"):
         st.success(f"Predicted Class: {prediction[0]} (0 = Malignant, 1 = Benign)")
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+
