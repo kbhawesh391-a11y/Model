@@ -1,0 +1,18 @@
+import joblib
+import numpy as np
+import streamlit as st
+
+# Load saved objects
+scaler = joblib.load("scaler.pkl")
+pca = joblib.load("pca.pkl")
+model = joblib.load("best_model_breast_cancer.pkl")
+
+# Input
+input_array = np.array(user_input).reshape(1, -1)
+
+# Use original scaler + PCA
+input_scaled = scaler.transform(input_array)
+input_pca = pca.transform(input_scaled)
+
+prediction = model.predict(input_pca)
+st.success(f"Predicted Class: {prediction[0]}")

@@ -1,0 +1,21 @@
+import joblib
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+# Assume X_train is your training data
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+
+pca = PCA(n_components=0.95)
+X_train_pca = pca.fit_transform(X_train_scaled)
+
+# Train model
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+model.fit(X_train_pca, y_train)
+
+# Save everything together
+joblib.dump(scaler, "scaler.pkl")
+joblib.dump(pca, "pca.pkl")
+joblib.dump(model, "best_model_breast_cancer.pkl")
